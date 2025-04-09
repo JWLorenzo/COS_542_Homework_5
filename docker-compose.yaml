@@ -19,3 +19,8 @@ services:
     build: ./wind
     expose:
       - "5005"
+
+  weatherman:
+    build: ./weatherman
+    expose:
+      - "5005"

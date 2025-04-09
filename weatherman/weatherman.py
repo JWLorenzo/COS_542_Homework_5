@@ -6,15 +6,15 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def return_condition():
+def forecast():
     try:
-        return f"""
-        Wind: {requests.get("http://wind:5005/")}
-        Temp: {requests.get("http://temp:5005/")}
-        Humidity: {requests.get("http://humidity:5005/")}
-        """
+        wind = requests.get("http://nginx/wind/").text
+        temp = requests.get("http://nginx/temp/").text
+        humidity = requests.get("http://nginx/humidity/").text
+
+        return f"{wind}<br>{temp}<br>{humidity}"
     except requests.exceptions.RequestException as e:
-        return f"error: {str(e)}"
+        return f"uh oh error: {str(e)}"
 
 
 if __name__ == "__main__":
